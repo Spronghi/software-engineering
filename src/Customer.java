@@ -1,12 +1,22 @@
 
 public class Customer {
-	private String name;
-	private String surname;
-	private String email;
-	private String username;
-	private String password;
-	private String telephone;
-	
+    private String name;
+    private String surname;
+    private String email;
+    private String username;
+    private String password;
+    private String telephone;
+
+    public Customer(String name, String surname, String email, 
+	                String username, String password, String telephone){
+		this.name=name;
+		this.surname=surname;
+		this.email=email;
+		this.username=username;
+		this.password=password;
+		this.telephone=telephone;
+    }
+    
 	public String getName() {
 		return name;
 	}
