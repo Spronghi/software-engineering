@@ -1,5 +1,9 @@
-CREATE database carloan;
-USE carloan
+CREATE database CarloanDB;
+USE CarloanDB;
+
+#create a new user username: CarloanUser, password: carloan
+CREATE USER 'CarloanUser'@'localhost' IDENTIFIED BY 'carloan';
+GRANT CREATE, SELECT, INSERT, DELETE ON CarloanDB.* TO CarloanUser@localhost IDENTIFIED BY 'carloan';
 
 CREATE TABLE customer(
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -30,7 +34,7 @@ CREATE TABLE agency (
 
 CREATE TABLE car_status (
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    status VARCHAR(13) NOT NULL
+    status VARCHAR(26) NOT NULL
 );
 
 CREATE TABLE car_category (
@@ -168,26 +172,16 @@ INSERT INTO currency(type, symbol) VALUES ("euro", "€");
 INSERT INTO currency(type, symbol) VALUES ("dollar", "$");
 INSERT INTO currency(type, symbol) VALUES ("pund", "£");
 
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (300, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (230, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (450, 2, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (950, 2, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (120, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (120, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (300, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (300, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (220, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (320, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (300, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (230, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (450, 2, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (950, 2, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (120, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (120, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (300, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (300, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (220, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) VALUES (320, 1, 1);
 
 INSERT INTO contract_type(type) VALUES("one-day pass");
 INSERT INTO contract_type(type) VALUES("one-week pass");
@@ -202,3 +196,22 @@ INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, cu
     VALUES(4, "2015-2-01", "2015-2-08", true, 2015-2-08, 2030, 4, 4, 3, 3, 1, 7, 8);
 INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
     VALUES(5, "2015-3-15", "2015-3-18", true, 2015-3-18, 500, 5, 1, 1, 4, 1, 8, 9);
+
+#creating views
+CREATE VIEW agency_location_join AS SELECT agency.name, location.city, location.cap, location.address1 as "address" FROM agency LEFT JOIN location ON agency.location_id=location.id;
+
+CREATE VIEW car_status_join AS SELECT car.license_plate, car_status.status FROM car LEFT JOIN car_status ON car.car_status_id=car_status.id;
+
+CREATE VIEW car_category_join AS SELECT car.license_plate, car_category.category FROM car LEFT JOIN car_category ON car.car_category_id=car_category.id;
+
+CREATE VIEW avaible_car AS SELECT car.license_plate, car_status.status FROM car INNER JOIN car_status ON car.car_status_id=car_status.id && car_status.status="avaible";
+
+CREATE VIEW hired_car AS SELECT car.license_plate, car_status.status FROM car INNER JOIN car_status ON car.car_status_id=car_status.id && car_status.status="hired";
+
+CREATE VIEW emergency_maintenance_car AS SELECT car.license_plate, car_status.status FROM car INNER JOIN car_status ON car.car_status_id=car_status.id && car_status.status="emergency maintenance";
+
+CREATE VIEW routine_maintenance_car AS SELECT car.license_plate, car_status.status FROM car INNER JOIN car_status ON car.car_status_id=car_status.id && car_status.status="routine maintenance";
+
+CREATE VIEW car_category_status_join AS SELECT car.license_plate, car.last_km, car_status.status, car_category.category FROM car LEFT JOIN car_status ON car.car_status_id=car_status.id LEFT JOIN car_category on car.car_category_id=car_category.id;
+
+commit;
