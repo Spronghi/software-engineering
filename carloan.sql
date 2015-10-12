@@ -173,35 +173,32 @@ INSERT INTO payment(amount, payment_type_id, currency_id)
 INSERT INTO payment(amount, payment_type_id, currency_id) 
     VALUES (230, 1, 1);
 INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (420, 2, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (120, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (340, 2, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (150, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (120, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (500, 2, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (110, 1, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
-    VALUES (450, 2, 1);
-INSERT INTO payment(amount, payment_type_id, currency_id) 
     VALUES (450, 2, 1);
 INSERT INTO payment(amount, payment_type_id, currency_id) 
     VALUES (950, 2, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (120, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (120, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (300, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (300, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (220, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (320, 1, 1);
 
 INSERT INTO contract_type(type) VALUES("one-day pass");
 INSERT INTO contract_type(type) VALUES("one-week pass");
 
-INSERT INTO contract(contract_no, start, return_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
-    VALUES(1, "2015-04-13", "2015-04-18", NULL, NULL, 1, 1, 1, 8, 2, 1, 2);
-INSERT INTO contract(contract_no, start, return_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
-    VALUES(2, "2015-03-13", "2015-03-13", NULL, NULL, 2, 2, 2, 9, 2, 10, 11);
-
-
-
-
-
+INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
+    VALUES(1, "2015-04-13", "2015-04-18", true, NULL, NULL, 1, 1, 1, 8, 2, 1, 2);
+INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
+    VALUES(2, "2015-03-13", "2015-03-13", false, NULL, NULL, 2, 2, 2, 9, 2, 3, 4);
+INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
+    VALUES(3, "2015-5-23", "2015-5-26", true, 2015-5-26, 1002, 3, 3, 3, 2, 1, 5, 6);
+INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
+    VALUES(4, "2015-2-01", "2015-2-08", true, 2015-2-08, 2030, 4, 4, 3, 3, 1, 7, 8);
+INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
+    VALUES(5, "2015-3-15", "2015-3-18", true, 2015-3-18, 500, 5, 1, 1, 4, 1, 8, 9);
