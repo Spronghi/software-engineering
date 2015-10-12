@@ -5,7 +5,7 @@ CREATE TABLE customer(
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
-    telephone INTEGER(20) DEFAULT NULL,
+    telephone VARCHAR(20) DEFAULT NULL,
     email VARCHAR(100) DEFAULT NULL,
     username VARCHAR(100) DEFAULT NULL,
     password VARCHAR(100) DEFAULT NULL
@@ -24,7 +24,7 @@ CREATE TABLE agency (
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     location_id INTEGER(10) NOT NULL,
-    FOREIGN KEY (location_id) REFERENCES customer(id)
+    FOREIGN KEY (location_id) REFERENCES location(id)
     ON UPDATE CASCADE
 );
 
@@ -72,15 +72,15 @@ CREATE TABLE payment(
 
 CREATE TABLE contract_type (
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    base VARCHAR(11) NOT NULL,
-    km_limit BOOLEAN NOT NULL
+    type VARCHAR(10) NOT NULL
 );
 
 CREATE TABLE contract( 
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    code INTEGER(6) NOT NULL,
+    contract_no INTEGER(6) NOT NULL,
     start DATE NOT NULL,
     return_limit DATE NOT NULL,
+    km_limit BOOLEAN NOT NULL,
     end DATE DEFAULT NULL,
     end_km INTEGER(10) DEFAULT NULL,
     customer_id INTEGER(10) NOT NULL,
@@ -104,4 +104,104 @@ CREATE TABLE contract(
     FOREIGN KEY (deposit_id) REFERENCES payment(id)
     ON UPDATE CASCADE
 );
+
+#populate tables
+INSERT INTO customer(name, surname, telephone, email, username, password)
+    VALUES("Giacomo", "Tizio", "3802539904", "giacomo.tizio@gmail.com", "giacomotizio", "giacomotizio");
+INSERT INTO customer(name, surname, telephone, email, username, password) 
+    VALUES("Alberto", "Forensi", "3490872294", "alberto.forensi@gmail.com", "albertoforensi", "albertoforensi");
+INSERT INTO customer(name, surname, telephone, email, username, password) 
+    VALUES("Lorenzo", "Ganioni", "3478940937", "lorenzo.ganioni@gmail.com", "lorenzoganioni", "lorenzoganioni");
+INSERT INTO customer(name, surname, telephone, email, username, password) 
+    VALUES("Giancarlo", "Fiono", "3809587746", "giancarlo.fiono@gmail.com", "giancarlofiono", "giancarlofiono");
+INSERT INTO customer(name, surname, telephone, email, username, password) 
+    VALUES("Fiorenzo", "Porto", "3469387594", "fiorenzo.porto@gmail.com", "fiorenzoporto", "fiorenzoporto");
+
+INSERT INTO location(city, cap, address1) VALUES ("Lecce", 73100, "Via Toma, 43");
+INSERT INTO location(city, cap, address1, address2) VALUES ("Milano", 20121, "Viale Loreto, 109", "Via Lombardi, 79");
+INSERT INTO location(city, cap, address1) VALUES ("Firenze", 50121, "Via Della Scienza, 4");
+INSERT INTO location(city, cap, address1) VALUES ("Venezia", 73100, "Via Tizio, 392");
+INSERT INTO location(city, cap, address1) VALUES ("Bologna", 30010, "Via Duca, 6");
+INSERT INTO location(city, cap, address1) VALUES ("Milano", 20121, "Viale Marche, 80");
+
+INSERT INTO agency(name, location_id) VALUES ("CarLoan Lecce", 1);
+INSERT INTO agency(name, location_id) VALUES ("CarLoan Firenze", 3);
+INSERT INTO agency(name, location_id) VALUES ("CarLoan Milano", 6);
+
+INSERT INTO car_status(status) VALUES ("avaible");
+INSERT INTO car_status(status) VALUES ("hired");
+INSERT INTO car_status(status) VALUES ("routine maintenance");
+INSERT INTO car_status(status) VALUES ("emergency maintenance");
+
+INSERT INTO car_category(category) VALUES ("A");
+INSERT INTO car_category(category) VALUES ("B");
+INSERT INTO car_category(category) VALUES ("C");
+INSERT INTO car_category(category) VALUES ("D");
+
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("MI293RL", 1003, 1, 1);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("BN930LE", 9038, 2, 1);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("BO857493", 2839, 3, 1);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("VE498DJ", 3748, 2, 1);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("RE4637J", 2039, 1, 1);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("GO283KF", 1003, 3, 1);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("PR8273H", 2837, 4, 4);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("GO940IJ", 4039, 4, 2);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("PZ748JI", 2837, 2, 2);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("UD049LB", 4958, 1, 4);
+INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("GE094OK", 2739, 3, 3);
+
+INSERT INTO payment_type(type) VALUES ("cash");
+INSERT INTO payment_type(type) VALUES ("credit/debit card");
+
+INSERT INTO currency(type, symbol) VALUES ("euro", "€");
+INSERT INTO currency(type, symbol) VALUES ("dollar", "$");
+INSERT INTO currency(type, symbol) VALUES ("pund", "£");
+
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (300, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (230, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (420, 2, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (120, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (340, 2, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (150, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (120, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (500, 2, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (110, 1, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (450, 2, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (450, 2, 1);
+INSERT INTO payment(amount, payment_type_id, currency_id) 
+    VALUES (950, 2, 1);
+
+INSERT INTO contract_type(type) VALUES("one-day pass");
+INSERT INTO contract_type(type) VALUES("one-week pass");
+
+INSERT INTO contract(contract_no, start, return_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
+    VALUES(1, "2015-04-13", "2015-04-18", NULL, NULL, 1, 1, 1, 8, 2, 1, 2);
+INSERT INTO contract(contract_no, start, return_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
+    VALUES(2, "2015-03-13", "2015-03-13", NULL, NULL, 2, 2, 2, 9, 2, 10, 11);
+
+
+
+
 
