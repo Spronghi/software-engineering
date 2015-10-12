@@ -6,9 +6,9 @@ CREATE TABLE customer(
     name VARCHAR(50) NOT NULL,
     surname VARCHAR(50) NOT NULL,
     telephone VARCHAR(20) DEFAULT NULL,
-    email VARCHAR(100) DEFAULT NULL,
-    username VARCHAR(100) DEFAULT NULL,
-    password VARCHAR(100) DEFAULT NULL
+    email VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE location(
@@ -30,7 +30,7 @@ CREATE TABLE agency (
 
 CREATE TABLE car_status (
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    status VARCHAR(26) DEFAULT NULL
+    status VARCHAR(13) NOT NULL
 );
 
 CREATE TABLE car_category (
@@ -40,7 +40,7 @@ CREATE TABLE car_category (
 
 CREATE TABLE car (
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    license_plate VARCHAR(7) NOT NULL,
+    license_plate VARCHAR(10) NOT NULL,
     last_km INTEGER(10) NOT NULL,
     car_category_id INTEGER(10) NOT NULL,
     car_status_id INTEGER(10) NOT NULL,
