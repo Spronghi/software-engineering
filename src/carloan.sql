@@ -7,8 +7,8 @@ GRANT CREATE, SELECT, INSERT, DELETE ON CarloanDB.* TO CarloanUser@localhost IDE
 
 CREATE TABLE customer(
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    surname VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
     telephone VARCHAR(20) DEFAULT NULL,
     email VARCHAR(100) NOT NULL,
     username VARCHAR(100) NOT NULL,
@@ -110,15 +110,15 @@ CREATE TABLE contract(
 );
 
 #populate tables
-INSERT INTO customer(name, surname, telephone, email, username, password)
+INSERT INTO customer(first_name, last_name, telephone, email, username, password)
     VALUES("Giacomo", "Tizio", "3802539904", "giacomo.tizio@gmail.com", "giacomotizio", "giacomotizio");
-INSERT INTO customer(name, surname, telephone, email, username, password) 
+INSERT INTO customer(first_name, last_name, telephone, email, username, password) 
     VALUES("Alberto", "Forensi", "3490872294", "alberto.forensi@gmail.com", "albertoforensi", "albertoforensi");
-INSERT INTO customer(name, surname, telephone, email, username, password) 
+INSERT INTO customer(first_name, last_name, telephone, email, username, password) 
     VALUES("Lorenzo", "Ganioni", "3478940937", "lorenzo.ganioni@gmail.com", "lorenzoganioni", "lorenzoganioni");
-INSERT INTO customer(name, surname, telephone, email, username, password) 
+INSERT INTO customer(first_name, last_name, telephone, email, username, password) 
     VALUES("Giancarlo", "Fiono", "3809587746", "giancarlo.fiono@gmail.com", "giancarlofiono", "giancarlofiono");
-INSERT INTO customer(name, surname, telephone, email, username, password) 
+INSERT INTO customer(first_name, last_name, telephone, email, username, password) 
     VALUES("Fiorenzo", "Porto", "3469387594", "fiorenzo.porto@gmail.com", "fiorenzoporto", "fiorenzoporto");
 
 INSERT INTO location(city, cap, address1) VALUES ("Lecce", 73100, "Via Toma, 43");
@@ -193,25 +193,11 @@ INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, cu
 INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
     VALUES(3, "2015-5-23", "2015-5-26", true, 2015-5-26, 1002, 3, 3, 3, 2, 1, 5, 6);
 INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
-    VALUES(4, "2015-2-01", "2015-2-08", true, 2015-2-08, 2030, 4, 4, 3, 3, 1, 7, 8);
-INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, customer_id, agency_id, return_agency_id, car_id, contract_type_id, total_payment_id, deposit_id)
     VALUES(5, "2015-3-15", "2015-3-18", true, 2015-3-18, 500, 5, 1, 1, 4, 1, 8, 9);
 
 #creating views
-CREATE VIEW agency_location_join AS SELECT agency.name, location.city, location.cap, location.address1 as "address" FROM agency LEFT JOIN location ON agency.location_id=location.id;
+CREATE VIEW agency_location_view AS SELECT agency.name, location.city, location.cap, location.address1 as "address" FROM agency LEFT JOIN location ON agency.location_id=location.id;
+CREATE VIEW car_view AS SELECT car.license_plate, car.last_km, car_status.status, car_category.category FROM car INNER JOIN car_status ON car.car_status_id=car_status.id INNER JOIN car_category ON car_category_id = car_category.id;
 
-CREATE VIEW car_status_join AS SELECT car.license_plate, car_status.status FROM car LEFT JOIN car_status ON car.car_status_id=car_status.id;
 
-CREATE VIEW car_category_join AS SELECT car.license_plate, car_category.category FROM car LEFT JOIN car_category ON car.car_category_id=car_category.id;
 
-CREATE VIEW avaible_car AS SELECT car.license_plate, car_status.status FROM car INNER JOIN car_status ON car.car_status_id=car_status.id && car_status.status="avaible";
-
-CREATE VIEW hired_car AS SELECT car.license_plate, car_status.status FROM car INNER JOIN car_status ON car.car_status_id=car_status.id && car_status.status="hired";
-
-CREATE VIEW emergency_maintenance_car AS SELECT car.license_plate, car_status.status FROM car INNER JOIN car_status ON car.car_status_id=car_status.id && car_status.status="emergency maintenance";
-
-CREATE VIEW routine_maintenance_car AS SELECT car.license_plate, car_status.status FROM car INNER JOIN car_status ON car.car_status_id=car_status.id && car_status.status="routine maintenance";
-
-CREATE VIEW car_category_status_join AS SELECT car.license_plate, car.last_km, car_status.status, car_category.category FROM car LEFT JOIN car_status ON car.car_status_id=car_status.id LEFT JOIN car_category on car.car_category_id=car_category.id;
-
-commit;
