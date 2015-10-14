@@ -4,6 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import address.model.Car;
+
 public class TableData {
     private Statement statement;
     ResultSet resultSet;
@@ -12,26 +16,26 @@ public class TableData {
         try {
             statement = DbAccess.getInstance().createStatement();
         } catch (SQLException | DatabaseConnectionException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     }
-    public String getAvaibleCar(){
+    public ObservableList<Car> getAvaibleCar(){
         try {
-            resultSet = statement.executeQuery("SELECT * FROM avaible_car");
+            resultSet = statement.executeQuery("SELECT * FROM car_view");
         } catch (SQLException e1) {
             e1.printStackTrace();
         }
-        String result = "";
+        ObservableList<Car> resultList = FXCollections.observableArrayList();
         try {
             while(resultSet.next()){
-                result += resultSet.getString("LICENSE_PLATE") + ", ";
-                result += resultSet.getString("STATUS") + '\n';
+                Car istance = new Car(resultSet.getString("LICENSE_PLATE"), 
+                        resultSet.getString("LAST_KM"), resultSet.getString("CATEGORY"),
+                        resultSet.getString("STATUS"));
+                resultList.add(istance);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
+        return resultList;
     }
 }
