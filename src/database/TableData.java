@@ -28,9 +28,9 @@ public class TableData {
         ObservableList<Car> resultList = FXCollections.observableArrayList();
         try {
             while(resultSet.next()){
-                Car istance = new Car(resultSet.getString("LICENSE_PLATE"), 
-                        resultSet.getString("LAST_KM"), resultSet.getString("CATEGORY"),
-                        resultSet.getString("STATUS"));
+                Car istance = new Car(resultSet.getString("NAME"),
+                		resultSet.getString("LICENSE_PLATE"), resultSet.getInt("LAST_KM"), 
+                		resultSet.getString("CATEGORY"), resultSet.getString("STATUS"));
                 resultList.add(istance);
             }
         } catch (SQLException e) {
