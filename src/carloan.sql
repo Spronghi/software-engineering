@@ -44,6 +44,7 @@ CREATE TABLE car_category (
 
 CREATE TABLE car (
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
     license_plate VARCHAR(10) NOT NULL,
     last_km INTEGER(10) NOT NULL,
     car_category_id INTEGER(10) NOT NULL,
@@ -142,28 +143,28 @@ INSERT INTO car_category(category) VALUES ("B");
 INSERT INTO car_category(category) VALUES ("C");
 INSERT INTO car_category(category) VALUES ("D");
 
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("MI293RL", 1003, 1, 1);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("BN930LE", 9038, 2, 1);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("BO857493", 2839, 3, 1);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("VE498DJ", 3748, 2, 1);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("RE4637J", 2039, 1, 1);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("GO283KF", 1003, 3, 1);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("PR8273H", 2837, 4, 4);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("GO940IJ", 4039, 4, 2);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("PZ748JI", 2837, 2, 2);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("UD049LB", 4958, 1, 4);
-INSERT INTO car(license_plate, last_km, car_category_id, car_status_id)
-    VALUES ("GE094OK", 2739, 3, 3);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("Audi TT", "MI293RL", 1003, 1, 1);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("Alfa Romeo 4C", "BN930LE", 9038, 2, 1);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("Seat Lèon", "BO857493", 2839, 3, 1);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("Jeep Grand Cherokee", "VE498DJ", 3748, 2, 1);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("BMW Serie 1","RE4637J", 2039, 1, 1);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("Alfa Romeo Giulietta", "GO283KF", 1003, 3, 1);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("Toyota Yaris", "PR8273H", 2837, 4, 4);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("Nissan Micra", "GO940IJ", 4039, 4, 2);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("Mercedes CLA", "PZ748JI", 2837, 2, 2);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("BMW X3", "UD049LB", 4958, 1, 4);
+INSERT INTO car(name, license_plate, last_km, car_category_id, car_status_id)
+    VALUES ("Honda Civic", "GE094OK", 2739, 3, 3);
 
 INSERT INTO payment_type(type) VALUES ("cash");
 INSERT INTO payment_type(type) VALUES ("credit/debit card");
@@ -197,7 +198,7 @@ INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, cu
 
 #creating views
 CREATE VIEW agency_location_view AS SELECT agency.name, location.city, location.cap, location.address1 as "address" FROM agency LEFT JOIN location ON agency.location_id=location.id;
-CREATE VIEW car_view AS SELECT car.license_plate, car.last_km, car_status.status, car_category.category FROM car INNER JOIN car_status ON car.car_status_id=car_status.id INNER JOIN car_category ON car_category_id = car_category.id;
+CREATE VIEW car_view AS SELECT car.name, car.license_plate, car.last_km, car_status.status, car_category.category FROM car INNER JOIN car_status ON car.car_status_id=car_status.id INNER JOIN car_category ON car_category_id = car_category.id;
 
 
 
