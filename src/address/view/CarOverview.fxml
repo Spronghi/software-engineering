@@ -26,13 +26,14 @@
           </Menu>
         </menus>
       </MenuBar>
-      <SplitPane dividerPositions="0.4684813753581662" prefHeight="578.0" prefWidth="700.0" AnchorPane.topAnchor="30.0">
+      <SplitPane dividerPositions="0.4684813753581662" prefHeight="578.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="30.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
                   <TableView fx:id="carStatusTable" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="carColumn" prefWidth="75.0" text="Car" />
+                        <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                      <TableColumn fx:id="licensePlateColumn" prefWidth="75.0" text="License Plate" />
                       <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
                     </columns>
                      <columnResizePolicy>
@@ -50,26 +51,36 @@
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="License Plate" />
-                        <Label text="Km" GridPane.rowIndex="1" />
-                        <Label text="Category" GridPane.rowIndex="2" />
-                        <Label text="Status" GridPane.rowIndex="3" />
-                        <Label fx:id="licensePlateLabel" GridPane.columnIndex="1" />
-                        <Label fx:id="kmLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="categoryLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label fx:id="statusLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="License Plate" GridPane.rowIndex="1" />
+                        <Label text="Km" GridPane.rowIndex="2" />
+                        <Label text="Category" GridPane.rowIndex="3" />
+                        <Label text="Status" GridPane.rowIndex="4" />
+                        <Label fx:id="licensePlateLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="kmLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="categoryLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label fx:id="statusLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label text="Name" />
+                        <Label fx:id="nameLabel" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                   <ButtonBar layoutX="153.0" layoutY="1.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                     <buttons>
                       <Button mnemonicParsing="false" text="Pull Back" />
                         <Button mnemonicParsing="false" text="Rent" />
+                    </buttons>
+                  </ButtonBar>
+                  <ButtonBar layoutX="58.0" layoutY="523.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" onAction="#handleNewCar" text="New..." />
+                        <Button mnemonicParsing="false" onAction="#handleEditCar" text="Edit..." />
+                        <Button mnemonicParsing="false" onAction="#handleDeleteCar" text="Delete" />
                     </buttons>
                   </ButtonBar>
                </children>
