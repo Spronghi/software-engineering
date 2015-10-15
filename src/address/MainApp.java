@@ -10,8 +10,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import address.model.Car;
+import address.view.CarEditDialogController;
 import address.view.CarOverviewController;
 
 public class MainApp extends Application {
@@ -61,6 +63,29 @@ public class MainApp extends Application {
     public ObservableList<Car> getCarData() {
         return carData;
     }
+	public boolean showCarEditDialog(Car car) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("/address/view/CarEditDialog.fxml"));
+		AnchorPane page = null;
+		try {
+			page = (AnchorPane) loader.load();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Edit Car");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+        
+        CarEditDialogController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setCar(car);
+        dialogStage.showAndWait();
+        return controller.isOkClicked();
+	}
     public static void main(String[] args) {
         launch(args);
     }
