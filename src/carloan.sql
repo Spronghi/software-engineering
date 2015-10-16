@@ -3,7 +3,7 @@ USE CarloanDB;
 
 #create a new user username: CarloanUser, password: carloan
 CREATE USER 'CarloanUser'@'localhost' IDENTIFIED BY 'carloan';
-GRANT CREATE, SELECT, INSERT, DELETE ON CarloanDB.* TO CarloanUser@localhost IDENTIFIED BY 'carloan';
+GRANT CREATE, SELECT, INSERT, DELETE, UPDATE ON CarloanDB.* TO CarloanUser@localhost IDENTIFIED BY 'carloan';
 
 CREATE TABLE customer(
     id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -198,7 +198,5 @@ INSERT INTO contract(contract_no, start, return_limit, km_limit, end, end_km, cu
 
 #creating views
 CREATE VIEW agency_location_view AS SELECT agency.name, location.city, location.cap, location.address1 as "address" FROM agency LEFT JOIN location ON agency.location_id=location.id;
-CREATE VIEW car_view AS SELECT car.name, car.license_plate, car.last_km, car_status.status, car_category.category FROM car INNER JOIN car_status ON car.car_status_id=car_status.id INNER JOIN car_category ON car_category_id = car_category.id;
-
-
+CREATE VIEW car_view AS SELECT car.id, car.name, car.license_plate, car.last_km, car_status.status, car_category.category FROM car INNER JOIN car_status ON car.car_status_id=car_status.id INNER JOIN car_category ON car_category_id = car_category.id;
 
