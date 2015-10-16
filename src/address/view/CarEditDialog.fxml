@@ -29,7 +29,22 @@
             <TextField fx:id="licensePlateField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="lastKmField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="categoryField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="statusField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <SplitMenuButton fx:id="categoryMenu" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleA" text="A" />
+                <MenuItem mnemonicParsing="false" onAction="#handleB" text="B" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleC" text="C" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleD" text="D" />
+              </items>
+            </SplitMenuButton>
+            <SplitMenuButton fx:id="statusMenu" mnemonicParsing="false" prefHeight="26.0" prefWidth="142.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#handleAvaible" text="avaible" />
+                <MenuItem mnemonicParsing="false" onAction="#handleHired" text="hired" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleRoutine" text="routine mantenaince" />
+                  <MenuItem mnemonicParsing="false" onAction="#handleSpecial" text="special mantenaince" />
+              </items>
+            </SplitMenuButton>
          </children>
       </GridPane>
       <ButtonBar layoutX="90.0" layoutY="246.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="5.0">

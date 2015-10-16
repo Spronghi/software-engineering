@@ -3,6 +3,8 @@ package address.view;
 import address.model.Car;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -15,9 +17,9 @@ public class CarEditDialogController {
     @FXML
     private TextField lastKmField;
     @FXML
-    private TextField categoryField;
+    private SplitMenuButton categoryMenu;
     @FXML
-    private TextField statusField;
+    private SplitMenuButton statusMenu;
     
     private Stage dialogStage;
     private Car car;
@@ -35,8 +37,11 @@ public class CarEditDialogController {
         nameField.setText(car.getName());
         licensePlateField.setText(car.getLicensePlate());
         lastKmField.setText(car.getLastKm().toString());
-        categoryField.setText(car.getCategory());
-        statusField.setText(car.getStatus());
+        categoryMenu.setText(car.getCategory());
+        statusMenu.setText(car.getStatus());
+
+        //categoryField.setText(car.getCategory());
+        //statusField.setText(car.getStatus());
     }
     public boolean isOkClicked() {
         return okClicked;
@@ -57,11 +62,10 @@ public class CarEditDialogController {
                 errorMessage += "No valid km (must be a number)!\n"; 
             }
         }
-		if(categoryField.getText() == null || categoryField.getText().length() == 0)
+    	if(categoryMenu.getText().compareToIgnoreCase("category") == 0)
     		errorMessage += "No valid category!\n";
-    	if(statusField.getText() == null || statusField.getText().length() == 0)
+    	if(statusMenu.getText().compareToIgnoreCase("status") == 0)
     		errorMessage += "No valid status!\n";
-    
     	if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -75,13 +79,45 @@ public class CarEditDialogController {
         }
     }
     @FXML
+    private void handleA() {
+    	categoryMenu.setText("A");
+    }
+    @FXML
+    private void handleB() {
+    	categoryMenu.setText("B");
+    }
+    @FXML
+    private void handleC() {
+    	categoryMenu.setText("C");
+    }
+    @FXML
+    private void handleD() {
+    	categoryMenu.setText("A");
+    }
+    @FXML
+    private void handleAvaible() {
+    	statusMenu.setText("avaible");
+    }
+    @FXML
+    private void handleHired() {
+    	statusMenu.setText("hired");
+    }
+    @FXML
+    private void handleRoutine() {
+    	statusMenu.setText("routine mantenaince");
+    }
+    @FXML
+    private void handleSpecial() {
+    	statusMenu.setText("special mantenaince");
+    }
+    @FXML
     private void handleOk() {
         if(isInputValid()){
             car.setName(nameField.getText());
             car.setLicensePlate(licensePlateField.getText());
             car.setLastKm(Integer.parseInt(lastKmField.getText()));
-            car.setCategory(categoryField.getText());
-            car.setStatus(statusField.getText());
+            car.setCategory(categoryMenu.getText());
+            car.setStatus(statusMenu.getText());
 
             okClicked = true;
             dialogStage.close();
@@ -92,14 +128,3 @@ public class CarEditDialogController {
         dialogStage.close();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
