@@ -1,5 +1,6 @@
 package address.view;
 
+import database.TableData;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -61,6 +62,7 @@ public class CarOverviewController {
         int selectedIndex = carStatusTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
         	carStatusTable.getItems().remove(selectedIndex);
+        	new TableData().deleteCar(carStatusTable.getSelectionModel().getSelectedItem());
         } else {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
@@ -72,19 +74,21 @@ public class CarOverviewController {
     }
     @FXML
     private void handleNewCar() {
-        Car tempPerson = new Car();
-        boolean okClicked = mainApp.showCarEditDialog(tempPerson);
+        Car tempCar = new Car();
+        boolean okClicked = mainApp.showCarEditDialog(tempCar);
         if (okClicked) {
-            mainApp.getCarData().add(tempPerson);
+            mainApp.getCarData().add(tempCar);
+            new TableData().newCar(tempCar);
         }
     }
     @FXML
     private void handleEditCar() {
-        Car selectedPerson = carStatusTable.getSelectionModel().getSelectedItem();
-        if (selectedPerson != null) {
-            boolean okClicked = mainApp.showCarEditDialog(selectedPerson);
+        Car selectedCar = carStatusTable.getSelectionModel().getSelectedItem();
+        if (selectedCar != null) {
+            boolean okClicked = mainApp.showCarEditDialog(selectedCar);
             if (okClicked) {
-                showCarDetails(selectedPerson);
+                showCarDetails(selectedCar);
+                new TableData().editCar(selectedCar);
             }
 
         } else {
