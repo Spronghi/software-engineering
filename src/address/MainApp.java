@@ -15,13 +15,15 @@ import javafx.stage.Stage;
 import address.model.Car;
 import address.view.CarEditDialogController;
 import address.view.CarOverviewController;
+import address.view.CarPullBackController;
 
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
     private ObservableList<Car> carData;
+    TableData tableData;
     public MainApp(){
-        TableData tableData = new TableData();
+        tableData = new TableData();
         carData = tableData.getAvaibleCar();
     }
 
@@ -63,6 +65,9 @@ public class MainApp extends Application {
     public ObservableList<Car> getCarData() {
         return carData;
     }
+    public TableData getTableData(){
+    	return tableData;
+    }
 	public boolean showCarEditDialog(Car car) {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(MainApp.class.getResource("/address/view/CarEditDialog.fxml"));
@@ -70,7 +75,6 @@ public class MainApp extends Application {
 		try {
 			page = (AnchorPane) loader.load();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         Stage dialogStage = new Stage();
@@ -81,6 +85,28 @@ public class MainApp extends Application {
         dialogStage.setScene(scene);
         
         CarEditDialogController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        controller.setCar(car);
+        dialogStage.showAndWait();
+        return controller.isOkClicked();
+	}
+	public boolean showCarPullBackDialog(Car car) {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(MainApp.class.getResource("/address/view/CarPullBackDialog.fxml"));
+		AnchorPane page = null;
+		try {
+			page = (AnchorPane) loader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Pull Back Car");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+        
+        CarPullBackController controller = loader.getController();
         controller.setDialogStage(dialogStage);
         controller.setCar(car);
         dialogStage.showAndWait();
