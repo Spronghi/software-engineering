@@ -3,7 +3,6 @@ package address.view;
 import address.model.Car;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -39,33 +38,34 @@ public class CarEditDialogController {
         lastKmField.setText(car.getLastKm().toString());
         categoryMenu.setText(car.getCategory());
         statusMenu.setText(car.getStatus());
-
-        //categoryField.setText(car.getCategory());
-        //statusField.setText(car.getStatus());
     }
     public boolean isOkClicked() {
         return okClicked;
     }
     private boolean isInputValid() {
     	String errorMessage = "";
-		if(nameField.getText() == null || nameField.getText().length() == 0)
+		if(nameField.getText() == null || nameField.getText().length() == 0){
 			errorMessage += "No valid name!\n";
-		if(licensePlateField.getText() == null || licensePlateField.getText().length() == 0)
+		}
+		if(licensePlateField.getText() == null || licensePlateField.getText().length() == 0){
 			errorMessage += "No valid license plate!\n";
+		}
     	if(lastKmField.getText() == null || lastKmField.getText().length() == 0){
 			errorMessage += "No valid km!\n";
-    	}else {
-            // try to parse the postal code into an int.
-            try {
-                Integer.parseInt(lastKmField.getText());
+    	} else {
+    		try {
+            	if( Integer.parseInt(lastKmField.getText())>99999);
+       				errorMessage += "Km not valid (must be <99999)";
             } catch (NumberFormatException e) {
                 errorMessage += "No valid km (must be a number)!\n"; 
             }
         }
-    	if(categoryMenu.getText().compareToIgnoreCase("category") == 0)
+    	if(categoryMenu.getText().compareToIgnoreCase("category") == 0){
     		errorMessage += "No valid category!\n";
-    	if(statusMenu.getText().compareToIgnoreCase("status") == 0)
+    	}
+    	if(statusMenu.getText().compareToIgnoreCase("status") == 0){
     		errorMessage += "No valid status!\n";
+    	}
     	if (errorMessage.length() == 0) {
             return true;
         } else {
@@ -123,8 +123,10 @@ public class CarEditDialogController {
             dialogStage.close();
         }
     }
+
     @FXML
     private void handleCancel() {
         dialogStage.close();
     }
+
 }
