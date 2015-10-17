@@ -58,6 +58,37 @@ public class CarOverviewController {
         }
     }
     @FXML
+    private void handleRentCar(){
+    	//to do
+    }
+    @FXML
+    private void handlePullBackCar(){
+    	Car selectedCar = carStatusTable.getSelectionModel().getSelectedItem();
+        if (selectedCar != null && selectedCar.getStatus().equalsIgnoreCase("hired")) {
+            boolean payClicked = mainApp.showCarPullBackDialog(selectedCar);
+            if (payClicked) {
+                showCarDetails(selectedCar);
+                mainApp.getTableData().editCar(selectedCar);
+            }
+        } else if(!(selectedCar.getStatus().equalsIgnoreCase("hired"))){
+        	Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Wrong Selection");
+            alert.setHeaderText("Not Hired Car Selected");
+            alert.setContentText("Please select an hired car in the table.");
+
+            alert.showAndWait();
+        } else {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Car Selected");
+            alert.setContentText("Please select a car in the table.");
+
+            alert.showAndWait();
+        }
+    }
+    @FXML
     private void handleDeleteCar() {
         int selectedIndex = carStatusTable.getSelectionModel().getSelectedIndex();
         if(selectedIndex >= 0){
@@ -78,7 +109,7 @@ public class CarOverviewController {
         boolean okClicked = mainApp.showCarEditDialog(tempCar);
         if (okClicked) {
             mainApp.getCarData().add(tempCar);
-            new TableData().newCar(tempCar);
+            mainApp.getTableData().newCar(tempCar);
         }
     }
     @FXML
@@ -88,7 +119,7 @@ public class CarOverviewController {
             boolean okClicked = mainApp.showCarEditDialog(selectedCar);
             if (okClicked) {
                 showCarDetails(selectedCar);
-                new TableData().editCar(selectedCar);
+                mainApp.getTableData().editCar(selectedCar);
             }
 
         } else {

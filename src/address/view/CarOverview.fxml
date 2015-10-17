@@ -72,7 +72,7 @@
                   </GridPane>
                   <ButtonBar layoutX="153.0" layoutY="1.0" prefHeight="40.0" prefWidth="200.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
                     <buttons>
-                      <Button mnemonicParsing="false" text="Pull Back" />
+                      <Button mnemonicParsing="false" onAction="#handlePullBackCar" text="Pull Back" />
                         <Button mnemonicParsing="false" text="Rent" />
                     </buttons>
                   </ButtonBar>
