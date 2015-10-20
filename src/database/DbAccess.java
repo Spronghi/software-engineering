@@ -19,15 +19,12 @@ public class DbAccess {
         try {
             Class.forName(DRIVER_CLASS_NAME).newInstance();
         } catch (Exception ex) {
-            System.out.println("[DRIVER NOT FOUND]: " + DRIVER_CLASS_NAME);
         }
         try {
             conn = DriverManager.getConnection(connectionString, USER_ID, PASSWORD);
         } catch (SQLException e) {
-            System.out.println("[CANNOT CONNECT TO DATABASE]");
             e.printStackTrace();
         }
-        System.out.println("[DATABASE CONNECTED]");
     }
     public static Connection getInstance() throws DatabaseConnectionException { 
         if(conn==null){
@@ -39,9 +36,7 @@ public class DbAccess {
         try{
             conn.close();
         } catch(SQLException e){
-            System.out.println("[CANNOT CLOSE THE DATABASE]");
             e.getMessage();
         }
-        System.out.println("[DATABASE DISCONNECTED]");
     }
 }
