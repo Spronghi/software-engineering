@@ -63,5 +63,4 @@ public class Location {
     public StringProperty address3Property() {
         return address3;
     }
-
 }
