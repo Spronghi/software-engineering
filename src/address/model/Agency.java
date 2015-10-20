@@ -8,8 +8,9 @@ import javafx.beans.property.StringProperty;
 public class Agency {
     private final StringProperty name;
     private final ObjectProperty<Location> location;
+    
     public Agency(String name, Location location){
-        this.name = new SimpleStringProperty(name);
+    	this.name = new SimpleStringProperty(name);
         this.location = new SimpleObjectProperty<Location>(location);
     }
     public String getName(){
