@@ -6,25 +6,20 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Car {
-	private final int id;
     private final StringProperty name;
     private final StringProperty licensePlate;
     private final IntegerProperty lastKm;
     private final StringProperty category;
     private final StringProperty status;
     public Car(){
-    	this(-1, null, null, 0, null, null);
+    	this(null, null, 0, null, null);
     }
-    public Car(int id, String name, String licensePlate, int lastKm, String category, String status) {
-        this.id = id;
+    public Car(String name, String licensePlate, int lastKm, String category, String status) {
     	this.name = new SimpleStringProperty(name);
         this.licensePlate = new SimpleStringProperty(licensePlate);
         this.lastKm = new SimpleIntegerProperty(lastKm);
         this.category = new SimpleStringProperty(category);
         this.status = new SimpleStringProperty(status);
-    }
-    public Integer getId(){
-    	return id;
     }
     public String getName(){
         return name.get();
