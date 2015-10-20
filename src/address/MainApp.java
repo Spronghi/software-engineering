@@ -3,9 +3,7 @@ package address;
 
 import java.io.IOException;
 
-import database.TableData;
 import javafx.application.Application;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -16,23 +14,21 @@ import address.model.Car;
 import address.view.CarEditDialogController;
 import address.view.CarOverviewController;
 import address.view.CarPullBackController;
+import address.view.LogInController;
+import address.view.RegisterDialogController;
 
 public class MainApp extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
-    private ObservableList<Car> carData;
-    TableData tableData;
-    public MainApp(){
-        tableData = new TableData();
-        carData = tableData.getAvaibleCar();
-    }
+
+    public MainApp(){}
 
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("CarLoan");
         
         initRootLayout();
-        showCarOverview();
+        showLogIn();
     }
     public void initRootLayout(){
         FXMLLoader loader = new FXMLLoader();
@@ -45,6 +41,40 @@ public class MainApp extends Application {
         Scene scene = new Scene(rootLayout);
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+    public boolean showRegister(){
+    	FXMLLoader loader = new FXMLLoader();
+    	loader.setLocation(MainApp.class.getResource("/address/view/RegisterDialog.fxml"));
+        AnchorPane page=null;
+        try {
+        	page = (AnchorPane) loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Stage dialogStage = new Stage();
+        dialogStage.setTitle("Register an account");
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        dialogStage.initOwner(primaryStage);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+        
+        RegisterDialogController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        dialogStage.showAndWait();
+        return controller.isOkClicked();
+    }
+    public void showLogIn(){
+    	FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MainApp.class.getResource("/address/view/LogIn.fxml"));
+        AnchorPane page=null;
+        try {
+        	page = (AnchorPane) loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        rootLayout.setCenter(page);
+        LogInController controller = loader.getController();
+        controller.setMainApp(this);
     }
     public void showCarOverview(){
         FXMLLoader loader = new FXMLLoader();
@@ -61,12 +91,6 @@ public class MainApp extends Application {
     }
     public Stage getPrimaryStage() {
         return primaryStage;
-    }
-    public ObservableList<Car> getCarData() {
-        return carData;
-    }
-    public TableData getTableData(){
-    	return tableData;
     }
 	public boolean showCarEditDialog(Car car) {
 		FXMLLoader loader = new FXMLLoader();
@@ -107,8 +131,8 @@ public class MainApp extends Application {
         dialogStage.setScene(scene);
         
         CarPullBackController controller = loader.getController();
-        controller.setDialogStage(dialogStage);
         controller.setCar(car);
+        controller.setDialogStage(dialogStage);
         dialogStage.showAndWait();
         return controller.isOkClicked();
 	}
