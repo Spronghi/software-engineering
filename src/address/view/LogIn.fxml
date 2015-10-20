@@ -32,7 +32,7 @@
             <Label prefHeight="16.0" prefWidth="198.0" text="Username or email address:" />
             <Label text="Password:" GridPane.rowIndex="1" />
             <TextField fx:id="usernameField" onAction="#handleLogIn" prefWidth="214.0" GridPane.columnIndex="1" />
-            <PasswordField fx:id="passwordField" onAction="#handleLogIn" onMouseClicked="#handleMouseClick" text="password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <PasswordField fx:id="passwordField" onAction="#handleLogIn" onMouseClicked="#handleMouseClick" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <Button layoutX="508.0" layoutY="272.0" mnemonicParsing="false" onAction="#handleLogIn" text="Log In" />
