@@ -1,6 +1,6 @@
 package address.view;
 
-import database.TableData;
+import database.Data;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -68,7 +68,7 @@ public class CarOverviewController {
             boolean payClicked = mainApp.showCarPullBackDialog(selectedCar);
             if (payClicked) {
                 showCarDetails(selectedCar);
-                mainApp.getTableData().editCar(selectedCar);
+                Data.car().edit(selectedCar);
             }
         } else if(!(selectedCar.getStatus().equalsIgnoreCase("hired"))){
         	Alert alert = new Alert(AlertType.WARNING);
@@ -91,15 +91,21 @@ public class CarOverviewController {
     @FXML
     private void handleDeleteCar() {
         int selectedIndex = carStatusTable.getSelectionModel().getSelectedIndex();
-        if(selectedIndex >= 0){
+        String errorMessage="";
+        if(selectedIndex < 0){
+        	errorMessage+="No selected car\n";        
+    	} else if( carStatusTable.getItems().get(selectedIndex).getStatus().equalsIgnoreCase("hired")){
+        	errorMessage+="Cannot delete an hired car\n";
+    	}
+        if(errorMessage == ""){
+        	Data.car().delete(carStatusTable.getItems().get(selectedIndex));
         	carStatusTable.getItems().remove(selectedIndex);
-        	new TableData().deleteCar(carStatusTable.getSelectionModel().getSelectedItem());
         } else {
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Car Selected");
-            alert.setContentText("Please select a car in the table");
+            alert.setTitle("Wrong Selection");
+            alert.setHeaderText("Wrong Car Selected");
+            alert.setContentText(errorMessage);
             alert.showAndWait();
         }
     }
@@ -108,33 +114,36 @@ public class CarOverviewController {
         Car tempCar = new Car();
         boolean okClicked = mainApp.showCarEditDialog(tempCar);
         if (okClicked) {
-            mainApp.getCarData().add(tempCar);
-            mainApp.getTableData().newCar(tempCar);
+            Data.car().getContainer().add(tempCar);
+            Data.car().add(tempCar);
         }
     }
     @FXML
     private void handleEditCar() {
         Car selectedCar = carStatusTable.getSelectionModel().getSelectedItem();
-        if (selectedCar != null) {
-            boolean okClicked = mainApp.showCarEditDialog(selectedCar);
+        String errorMessage="";
+        if(selectedCar == null){
+        	errorMessage+="No selected car\n";
+    	} else if(selectedCar.getStatus().equalsIgnoreCase("hired")){
+        	errorMessage+="Cannot edit an hired car\n";
+    	}
+        if(errorMessage == ""){
+        	boolean okClicked = mainApp.showCarEditDialog(selectedCar);
             if (okClicked) {
                 showCarDetails(selectedCar);
-                mainApp.getTableData().editCar(selectedCar);
+                Data.car().edit(selectedCar);
             }
-
         } else {
-            // Nothing selected.
             Alert alert = new Alert(AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Car Selected");
-            alert.setContentText("Please select a car in the table.");
-
+            alert.setTitle("Wrong Selection");
+            alert.setHeaderText("Wrong Car Selected");
+            alert.setContentText(errorMessage);
             alert.showAndWait();
         }
     }
     public void setMainApp(MainApp mainApp) {
         this.mainApp = mainApp;
-        carStatusTable.setItems(mainApp.getCarData());
+        carStatusTable.setItems(Data.car().getContainer());
     }
 }
