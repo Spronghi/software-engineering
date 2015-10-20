@@ -54,7 +54,7 @@ public class CarEditDialogController {
 			errorMessage += "No valid km!\n";
     	} else {
     		try {
-            	if( Integer.parseInt(lastKmField.getText())>99999);
+            	if( Integer.parseInt(lastKmField.getText())>99999)
        				errorMessage += "Km not valid (must be <99999)";
             } catch (NumberFormatException e) {
                 errorMessage += "No valid km (must be a number)!\n"; 
