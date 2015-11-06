@@ -14,7 +14,7 @@ class Constants {
 			+ "NULL AUTO_INCREMENT PRIMARY KEY,city VARCHAR(100) NOT NULL,postal_no VARCHAR(5) NOT NULL,"
 			+ "road VARCHAR(500) NOT NULL)";
 	static final String CREATE_AGENCY = "CREATE TABLE IF NOT EXISTS agency (id INTEGER(10) NOT NULL "
-			+ "AUTO_INCREMENT PRIMARY KEY,number INTEGER(10) NOT NULL,name VARCHAR(50) NOT NULL,location_id INTEGER(10) NOT NULL,"
+			+ "AUTO_INCREMENT PRIMARY KEY,name VARCHAR(50) NOT NULL, location_id INTEGER(10) NOT NULL,"
 			+ "FOREIGN KEY (location_id) REFERENCES location(id)ON UPDATE CASCADE)";
 	static final String CREATE_CAR_STATUS = "CREATE TABLE IF NOT EXISTS car_status (id INTEGER(10)"
 			+ "NOT NULL AUTO_INCREMENT PRIMARY KEY,status VARCHAR(26) NOT NULL)";
@@ -33,18 +33,17 @@ class Constants {
 			+ "AUTO_INCREMENT PRIMARY KEY,type VARCHAR(50) NOT NULL)";
 	static final String CREATE_CURRENCY = "CREATE TABLE  IF NOT EXISTS currency(id INTEGER(10) NOT "
 			+ "NULL AUTO_INCREMENT PRIMARY KEY,type VARCHAR(50) NOT NULL,symbol char NOT NULL)";
+	static final String CREATE_CONTRACT = "CREATE TABLE IF NOT EXISTS contract( id INTEGER(10) NOT NULL "
+			+ "AUTO_INCREMENT PRIMARY KEY,start DATE NOT NULL,end DATE NOT NULL,km INTEGER(10) NOT NULL,km_limit "
+			+ "BOOLEAN NOT NULL,open BOOLEAN DEFAULT TRUE NOT NULL,operator_id INTEGER(10) NOT NULL,customer_id "
+			+ "INTEGER(10) NOT NULL,start_agency_id INTEGER(10) NOT NULL,end_agency_id INTEGER(10) NOT NULL,"
+			+ " car_id INTEGER(10) NOT NULL, type_id INTEGER(10) NOT NULL,deposit DECIMAL(7,2) NOT NULL,"
+			+ " FOREIGN KEY (operator_id) REFERENCES operator(id) ON UPDATE CASCADE,FOREIGN KEY (customer_id) "
+			+ "REFERENCES customer(id)ON UPDATE CASCADE,FOREIGN KEY (start_agency_id) REFERENCES agency(id)"
+			+ "ON UPDATE CASCADE,FOREIGN KEY (end_agency_id) REFERENCES agency(id)ON UPDATE CASCADE,"
+			+ "FOREIGN KEY (car_id) REFERENCES car(id)ON UPDATE CASCADE,FOREIGN KEY (type_id) REFERENCES contract_type(id))";
 	static final String CREATE_PAYMENT= "CREATE TABLE IF NOT EXISTS payment( id INTEGER(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,"
-			+ "amount FLOAT(5,2) NOT NULL,type_id INTEGER(10) NOT NULL,currency_id INTEGER(10) NOT NULL,FOREIGN KEY "
-			+ "(type_id) REFERENCES payment_type(id),FOREIGN KEY (currency_id) REFERENCES currency(id))";
-	static final String CREATE_CONTRACT = "CREATE TABLE IF NOT EXISTS contract( id INTEGER(10) NOT NULL AUTO_INCREMENT "
-			+ "PRIMARY KEY,contract_no INTEGER(6) NOT NULL,start DATE NOT NULL,end DATE NOT NULL,km INTEGER(10) NOT "
-			+ "NULL,km_limit BOOLEAN NOT NULL,open BOOLEAN DEFAULT TRUE NOT NULL,operator_id INTEGER(10) NOT NULL,"
-			+ "customer_id INTEGER(10) NOT NULL,start_agency_id INTEGER(10) NOT NULL,end_agency_id INTEGER(10) NOT NULL,"
-			+ "car_id INTEGER(10) NOT NULL,type_id INTEGER(10) NOT NULL,payment_id INTEGER(10) NOT NULL,deposit_id "
-			+ "INTEGER(10) NOT NULL,FOREIGN KEY (operator_id) REFERENCES operator(id)ON UPDATE CASCADE,FOREIGN KEY "
-			+ "(customer_id) REFERENCES customer(id)ON UPDATE CASCADE,FOREIGN KEY (start_agency_id) REFERENCES "
-			+ "agency(id)ON UPDATE CASCADE,FOREIGN KEY (end_agency_id) REFERENCES agency(id)ON UPDATE CASCADE,"
-			+ "FOREIGN KEY (car_id) REFERENCES car(id)ON UPDATE CASCADE,FOREIGN KEY (type_id) REFERENCES "
-			+ "contract_type(id),FOREIGN KEY (payment_id) REFERENCES payment(id)ON UPDATE CASCADE,FOREIGN KEY "
-			+ "(deposit_id) REFERENCES payment(id)ON UPDATE CASCADE)";
+			+ "amount DECIMAL(7,2) NOT NULL,date TIMESTAMP NOT NULL,type_id INTEGER(10) NOT NULL,currency_id INTEGER(10) NOT NULL,"
+			+ "contract_id INTEGER(10) NOT NULL,FOREIGN KEY (type_id) REFERENCES payment_type(id),FOREIGN KEY (currency_id) "
+			+ "REFERENCES currency(id),FOREIGN KEY (contract_id) REFERENCES contract(id))";
 }
