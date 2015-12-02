@@ -92,7 +92,6 @@ CREATE TABLE IF NOT EXISTS contract(
     end_agency_id INTEGER(10) NOT NULL,
     car_id INTEGER(10) NOT NULL,
     type_id INTEGER(10) NOT NULL,
-    deposit DECIMAL(7,2) NOT NULL,
     FOREIGN KEY (operator_id) REFERENCES operator(id)
     ON UPDATE CASCADE,
     FOREIGN KEY (customer_id) REFERENCES customer(id)
@@ -126,6 +125,8 @@ INSERT INTO operator(first_name, last_name, email, username, password)
     VALUES("Giancarlo", "Fiono", "giancarlo.fiono@gmail.com", "giancarlofiono", "giancarlofiono");
 INSERT INTO operator(first_name, last_name, email, username, password) 
     VALUES("Fiorenzo", "Porto", "fiorenzo.porto@gmail.com", "fiorenzoporto", "fiorenzoporto");
+INSERT INTO operator(first_name, last_name, email, username, password) 
+    VALUES("Simone", "Colaci", "sim.colaci@gmail.com","admin","admin");
 
 INSERT INTO customer(first_name, last_name, telephone, email) 
     VALUES("Trono", "Di Spade", "3401983374", "trono.dispade@gmail.com");
@@ -137,6 +138,8 @@ INSERT INTO customer(first_name, last_name, telephone, email)
     VALUES("Sergio", "Gatto", "3289387485", "sergio.gatto@gmail.com");
 INSERT INTO customer(first_name, last_name, telephone, email) 
     VALUES("Mario", "Zio Frank", "3890298493", "mario.ziofrank@gmail.com");
+INSERT INTO customer(first_name, last_name, telephone, email) 
+    VALUES("Simone", "Colaci", "3801453304", "mario.ziofrank@gmail.com");
 
 INSERT INTO location(city, postal_no, road) VALUES ("Lecce", 73100, "Via Toma, 43");
 INSERT INTO location(city, postal_no, road) VALUES ("Firenze", 50121, "Via Della Scienza, 4");
@@ -196,9 +199,3 @@ INSERT INTO currency(type, symbol) VALUES ("pound", "£");
 
 INSERT INTO contract_type(type) VALUES("one-day pass");
 INSERT INTO contract_type(type) VALUES("one-week pass");
-
-INSERT INTO contract(start,end,km,km_limit,open,operator_id,customer_id,start_agency_id,end_agency_id,car_id,type_id,deposit) VALUES ("2015-04-02","2015-04-10",400,false,false,1,1,1,1,1,1,2621.00);
-
-INSERT INTO payment(amount,date, type_id, currency_id, contract_id) VALUES (2500.50,'2015-04-02 12:32:10',1,1,1);
-INSERT INTO payment(amount,date, type_id, currency_id, contract_id) VALUES (120.50,'2015-04-10 10:21:10',1,1,1);
-
