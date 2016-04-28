@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.carloan.presentation.controller.overview.NewContractViewController">
+   <children>
+      <AnchorPane layoutX="-103.0" layoutY="-84.0" prefHeight="51.0" prefWidth="370.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Label fx:id="titleLabel" text="Open Contract" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <font>
+                  <Font name="System Bold" size="26.0" />
+               </font>
+            </Label>
+            <Label fx:id="comandLabel" text="Comand" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="center" layoutX="72.0" layoutY="132.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="75.0" />
+      <AnchorPane fx:id="buttonPane" layoutX="-15.0" layoutY="264.0" prefHeight="26.0" prefWidth="370.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
+         <children>
+            <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="backButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="80.0" text="Back" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Button fx:id="continueButton" mnemonicParsing="false" prefWidth="80.0" text="Continue" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

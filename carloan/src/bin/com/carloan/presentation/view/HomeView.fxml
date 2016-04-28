@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.carloan.presentation.controller.HomeViewController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="logOutItem" mnemonicParsing="false" text="Logout" />
+              <MenuItem fx:id="closeItem" mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+                  <MenuItem fx:id="newContractItem" mnemonicParsing="false" text="New Contract" />
+                  <MenuItem fx:id="resetPasswordItem" mnemonicParsing="false" text="Reset Password" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <ListView fx:id="categoryList" prefHeight="451.0" prefWidth="121.0" BorderPane.alignment="CENTER" />
+   </left>
+   <bottom>
+      <Pane prefHeight="20.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="operatorLabel" layoutX="5.0" layoutY="2.0">
+               <font>
+                  <Font name="Ubuntu Condensed" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </bottom>
+   <center>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane fx:id="center" layoutX="3.0" layoutY="39.0" prefHeight="412.0" prefWidth="473.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="3.0" AnchorPane.topAnchor="35.0" />
+            <AnchorPane prefHeight="30.0" prefWidth="479.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="categoryLabel" layoutX="14.0" layoutY="5.0" text="Choose a category" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="3.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

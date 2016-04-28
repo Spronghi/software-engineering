@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.carloan.presentation.controller.LoginViewController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="600.0">
+         <image>
+            <Image url="@../../resources/background.jpg" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="150.0" layoutY="170.0" AnchorPane.bottomAnchor="170.0" AnchorPane.topAnchor="170.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="142.0" minWidth="10.0" prefWidth="76.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="224.0" minWidth="10.0" prefWidth="224.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TextField fx:id="usernameField" GridPane.columnIndex="1" />
+            <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Username" />
+            <Label text="Password" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Label layoutX="226.0" layoutY="117.0" text="login" textFill="#b82929">
+         <font>
+            <Font name="Ubuntu Condensed" size="45.0" />
+         </font>
+      </Label>
+      <Label layoutX="61.0" layoutY="33.0" text="Carloan" textFill="#b82929">
+         <font>
+            <Font name="Ubuntu Condensed" size="38.0" />
+         </font>
+      </Label>
+      <Label layoutX="105.0" layoutY="63.0" text="no more trains" textFill="#b82929">
+         <font>
+            <Font name="Ubuntu Condensed" size="21.0" />
+         </font>
+      </Label>
+      <Button fx:id="loginButton" layoutX="396.0" layoutY="230.0" mnemonicParsing="false" text="Login" />
+   </children>
+</AnchorPane>

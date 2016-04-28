@@ -1,0 +1,5 @@
+mysqldump -u root  -p carloan > carloan.sql
+
+mysql -uroot -p carloan < ~/workspace/software-engineering/resources/carloan.sql
+
+
